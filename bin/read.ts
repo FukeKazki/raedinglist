@@ -3,15 +3,19 @@
 import { Command } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
 // import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
 import { Table } from "https://raw.githubusercontent.com/FukeKazki/deno-cliffy/main/table/mod.ts";
-import { join, normalize, fromFileUrl } from "https://deno.land/std@0.177.0/path/mod.ts";
+import {
+  fromFileUrl,
+  join,
+  normalize,
+} from "https://deno.land/std@0.177.0/path/mod.ts";
 
 const displayReadingList = async () => {
   // どこから実行しても ~/readinglist/を参照できるように
-  const filePath = fromFileUrl(import.meta.url)
-  const path = normalize(join(filePath, '../', '../'))
-  
+  const filePath = fromFileUrl(import.meta.url);
+  const path = normalize(join(filePath, "../", "../"));
+
   const files: string[] = [];
-  
+
   // "yyyymmdd.md"なファイル取り出す
   for await (const dirEntry of Deno.readDir(path)) {
     if (dirEntry.isDirectory) continue;
@@ -38,7 +42,7 @@ const displayReadingList = async () => {
       table.push([title, url]);
     });
   }
-  table.render()
+  table.render();
 };
 
 await new Command()
