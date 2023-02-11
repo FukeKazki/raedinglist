@@ -1,14 +1,8 @@
 #!/usr/bin/env -S deno run -A
 
 import { Command } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
-import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
-import {
-  cursorTo,
-  eraseDown,
-  image,
-  link,
-} from "https://deno.land/x/cliffy@v0.25.7/ansi/ansi_escapes.ts";
-import { ansi } from "https://deno.land/x/cliffy@v0.25.7/ansi/ansi.ts";
+// import { Table } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
+import { Table } from "https://raw.githubusercontent.com/FukeKazki/deno-cliffy/main/table/mod.ts";
 
 const displayReadingList = async () => {
   console.log("hello");
@@ -22,8 +16,6 @@ const displayReadingList = async () => {
   const table: Table = new Table()
     .header(["title", "url"])
     .body([])
-    .padding(4)
-    .indent(10)
     .border(true);
 
   for (const file of files) {
@@ -36,14 +28,9 @@ const displayReadingList = async () => {
       const title = str.match(titleMatcher)?.groups?.title;
       if (!url || !title) return;
       table.push([title, url]);
-      // console.log(link(title, url));
     });
   }
-  console.log(
-    ansi.cursorUp.cursorLeft.eraseDown(),
-  );
-  // table.maxColWidth(70).render();
-  // const str = table.toString();
+  table.render()
 };
 
 await new Command()
