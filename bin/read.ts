@@ -1,17 +1,8 @@
 #!/usr/bin/env -S deno run -A
 
-import { Command } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
-// import { Table, Cell } from "https://deno.land/x/cliffy@v0.25.7/table/mod.ts";
-import {
-  Cell,
-  Table,
-} from "https://raw.githubusercontent.com/FukeKazki/deno-cliffy/main/table/mod.ts";
-import {
-  basename,
-  fromFileUrl,
-  join,
-  normalize,
-} from "https://deno.land/std@0.177.0/path/mod.ts";
+import { Command } from "cliffy/command/mod.ts";
+import { Cell, Table } from "cliffy/table/mod.ts";
+import { basename, fromFileUrl, join, normalize } from "std";
 
 const displayReadingList = async () => {
   // どこから実行しても ~/readinglist/を参照できるように
@@ -66,9 +57,20 @@ const displayReadingList = async () => {
   table.render();
 };
 
+const pullReadingList = async () => {
+  console.log("git pull");
+  const p = Deno.run({
+    cmd: ["git", "pull"],
+  });
+  await p.status();
+  p.close();
+};
+
 await new Command()
   .name("reading")
   .version("0.1.0")
   .description("readinglistを閲覧するためのCLIです")
   .action((_options, ..._args) => displayReadingList())
+  .command("update", "Update command.")
+  .action((_option, ..._args) => pullReadingList())
   .parse(Deno.args);

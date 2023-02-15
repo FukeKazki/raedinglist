@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "std": "https://deno.land/std@0.177.0/path/mod.ts",
+    "cliffy/": "https://raw.githubusercontent.com/FukeKazki/deno-cliffy/main/"
+    // "cliffy": "https://deno.land/x/cliffy@v0.25.7/"
+  }
+}
