@@ -1,0 +1,50 @@
+[
+  {
+    "date": "2023-02-07",
+    "title": "dotfiles/tmux-layout-setup.sh at main · mocaffy/dotfiles",
+    "url": "https://github.com/mocaffy/dotfiles/blob/main/.bin/tmux-layout-setup.sh",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-07",
+    "title": "Lima で Intel on ARM やる",
+    "url": "https://zenn.dev/sasasin/articles/46540925aecc4e",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-07",
+    "title": "fontello/svg2ttf: SVG -> TTF font convertor",
+    "url": "https://github.com/fontello/svg2ttf",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-07",
+    "title": "なぜテトリスなのか|Rustで作るテトリス入門",
+    "url": "https://zenn.dev/kumavale/books/30efec2e1d3428/viewer/bf2d45",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-07",
+    "title": "zellij-org/zellij: A terminal workspace with batteries included",
+    "url": "https://github.com/zellij-org/zellij",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-07",
+    "title": "伊良コーラ オンラインストア",
+    "url": "https://shop.iyoshicola.com/",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-07",
+    "title": "tpope/vim-surround: surround.vim: Delete/change/add parentheses/quotes/XML-tags/much more with ease",
+    "url": "https://github.com/tpope/vim-surround",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-07",
+    "title": "nvim-telescope/telescope.nvim: Find, Filter, Preview, Pick. All lua, all the time.",
+    "url": "https://github.com/nvim-telescope/telescope.nvim",
+    "memo": ""
+  }
+]
