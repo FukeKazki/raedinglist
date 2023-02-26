@@ -40,7 +40,6 @@ const displayReadingList = async () => {
   for (const file of files) {
     const res = await Deno.readTextFile(file);
     const json = JSON.parse(res) as JSON;
-    console.log(json);
     json.map((obj, index) => {
       const url = obj.url;
       const title = obj.title;
