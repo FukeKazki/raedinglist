@@ -21,4 +21,3 @@ console.log(
     link("Deno Land", "https://deno.land") +
     "\n",
 );
-

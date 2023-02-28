@@ -1,1 +1,38 @@
-[{"date":"2023-02-18","title":"設定 | Starship","url":"https://starship.rs/ja-JP/config/#custom-commands","memo":""},{"date":"2023-02-18","title":"Denoを開発するときにめっちゃ効率上げるコマンドを作った","url":"https://zenn.dev/kawarimidoll/articles/d371abbd46b65b","memo":""},{"date":"2023-02-18T08:28:00.863Z","title":"deno_stdを使ってみよう｜Effective Deno","url":"https://zenn.dev/uki00a/books/effective-deno/viewer/deno-std#basename","memo":"denoのメモ"},{"date":"2023-02-18T08:41:43.814Z","title":"Deno標準モジュール解説［前編］ ～Deno標準モジュールの概要と、モジュール解説（Archive～FMT） | gihyo.jp","url":"https://gihyo.jp/article/2023/01/deno-standard-modules-01","memo":"denoの日本語まとめ"},{"date":"2023-02-18T08:42:25.793Z","title":"設定 | Starship","url":"https://starship.rs/ja-JP/config/#custom-commands","memo":"custom powerlineの方法"},{"date":"2023-02-18T10:29:00.153Z","title":"open-pomodoro/openpomodoro-cli: A command-line Pomodoro tracker which uses the Open Pomodoro Format","url":"https://github.com/open-pomodoro/openpomodoro-cli","memo":"ポモドーロタイマーをcliで動かす"}]
+[
+  {
+    "date": "2023-02-18",
+    "title": "設定 | Starship",
+    "url": "https://starship.rs/ja-JP/config/#custom-commands",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-18",
+    "title": "Denoを開発するときにめっちゃ効率上げるコマンドを作った",
+    "url": "https://zenn.dev/kawarimidoll/articles/d371abbd46b65b",
+    "memo": ""
+  },
+  {
+    "date": "2023-02-18T08:28:00.863Z",
+    "title": "deno_stdを使ってみよう｜Effective Deno",
+    "url": "https://zenn.dev/uki00a/books/effective-deno/viewer/deno-std#basename",
+    "memo": "denoのメモ"
+  },
+  {
+    "date": "2023-02-18T08:41:43.814Z",
+    "title": "Deno標準モジュール解説［前編］ ～Deno標準モジュールの概要と、モジュール解説（Archive～FMT） | gihyo.jp",
+    "url": "https://gihyo.jp/article/2023/01/deno-standard-modules-01",
+    "memo": "denoの日本語まとめ"
+  },
+  {
+    "date": "2023-02-18T08:42:25.793Z",
+    "title": "設定 | Starship",
+    "url": "https://starship.rs/ja-JP/config/#custom-commands",
+    "memo": "custom powerlineの方法"
+  },
+  {
+    "date": "2023-02-18T10:29:00.153Z",
+    "title": "open-pomodoro/openpomodoro-cli: A command-line Pomodoro tracker which uses the Open Pomodoro Format",
+    "url": "https://github.com/open-pomodoro/openpomodoro-cli",
+    "memo": "ポモドーロタイマーをcliで動かす"
+  }
+]
