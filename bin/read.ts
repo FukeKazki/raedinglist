@@ -4,12 +4,12 @@ import { Command } from "cliffy/command/mod.ts";
 import { Cell, Table } from "cliffy/table/mod.ts";
 import { basename, extname, fromFileUrl, join, normalize } from "std";
 
-const displayReadingList = async () => {
+export const getFiles = async (sort = "asc") => {
   // どこから実行しても ~/readinglist/を参照できるように
   const filePath = fromFileUrl(import.meta.url);
   const path = normalize(join(filePath, "../", "../"));
 
-  const files: string[] = [];
+  let files: string[] = [];
 
   // "yyyymmdd.md"なファイル取り出す
   for await (const dirEntry of Deno.readDir(path)) {
@@ -18,7 +18,17 @@ const displayReadingList = async () => {
     if (extname(dirEntry.name) === ".md") continue;
     files.push(path + dirEntry.name);
   }
+  // 日付け順にソート
+  files.sort();
+  if (sort === "asc") {
+  } else {
+    files = files.reverse();
+  }
 
+  return files;
+};
+
+const displayReadingList = async () => {
   // 出力用のテーブルを作成
   const table: Table = new Table()
     .header(["date", "title", "url", "memo"])
@@ -27,15 +37,14 @@ const displayReadingList = async () => {
     .maxColWidth(100)
     .sort();
 
-  // 日付け順にソート
-  files.sort();
-
   type JSON = [{
     date: string;
     title: string;
     url: string;
     memo: string;
   }];
+
+  const files = await getFiles();
   // titleとurlを取り出す
   for (const file of files) {
     const res = await Deno.readTextFile(file);
