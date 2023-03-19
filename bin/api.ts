@@ -4,7 +4,7 @@ import { getFiles } from "./read.ts";
 
 const app = new Application();
 const router = new Router();
-const PORT = 20020 as const;
+const PORT = 80 as const;
 
 app.addEventListener("listen", ({ hostname, port, secure }) => {
   console.log(

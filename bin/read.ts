@@ -2,7 +2,41 @@
 
 import { Command } from "cliffy/command/mod.ts";
 import { Cell, Table } from "cliffy/table/mod.ts";
+import { Select } from "https://deno.land/x/cliffy@v0.25.7/prompt/select.ts";
 import { basename, extname, fromFileUrl, join, normalize } from "std";
+
+export const useCommand = async (cmd: string[]) => {
+  const p = Deno.run({
+    cmd,
+    "stderr": "piped",
+    "stdout": "piped",
+  });
+
+  const [status, stdout, stderror] = await Promise.all([
+    p.status(),
+    p.output(),
+    p.stderrOutput(),
+  ]);
+
+  return {
+    status,
+    stdout: new TextDecoder().decode(stdout),
+    stderror: new TextDecoder().decode(stderror),
+  };
+};
+
+export const getTitleKeyFile = async () => {
+  const files = await getFiles("desc");
+  const response = new Map();
+  for (const file of files) {
+    const res = await Deno.readTextFile(file);
+    const json = JSON.parse(res);
+    json.forEach((v) => {
+      response.set(v.title, file);
+    });
+  }
+  return response;
+};
 
 export const getFiles = async (sort = "asc") => {
   // どこから実行しても ~/readinglist/を参照できるように
@@ -26,6 +60,35 @@ export const getFiles = async (sort = "asc") => {
   }
 
   return files;
+};
+
+const edit = async () => {
+  const files = await getFiles("desc");
+  const response = [];
+  for (const file of files) {
+    const res = await Deno.readTextFile(file);
+    const json = JSON.parse(res);
+    response.push(json);
+  }
+  const titles = response.flat().map((data) => {
+    return data!.title as string;
+  });
+
+  const title = await Select.prompt({
+    message: "select title",
+    options: titles,
+  });
+  const fileMap = await getTitleKeyFile();
+  const file = fileMap.get(title);
+  console.log(file);
+  const prevData = await Deno.readTextFile(file);
+  const prevJson = JSON.parse(prevData);
+  const newJSON = prevJson.filter((v) => v.title !== title);
+  console.log(newJSON);
+  await Deno.writeTextFile(file, JSON.stringify(newJSON));
+  // ファイルを読み取る
+  // ファイルから該当オブジェクトを消す filter
+  // 書き込む
 };
 
 const displayReadingList = async () => {
@@ -125,13 +188,17 @@ const convert = async () => {
   }
 };
 
-await new Command()
-  .name("reading")
-  .version("0.1.0")
-  .description("readinglistを閲覧するためのCLIです")
-  .action((_options, ..._args) => displayReadingList())
-  .command("update", "Update command.")
-  .action((_option, ..._args) => pullReadingList())
-  .command("convert", "markdown convert json")
-  .action((_option, ..._args) => convert())
-  .parse(Deno.args);
+if (import.meta.main) {
+  await new Command()
+    .name("reading")
+    .version("0.1.0")
+    .description("readinglistを閲覧するためのCLIです")
+    .action((_options, ..._args) => displayReadingList())
+    .command("update", "Update command.")
+    .action((_option, ..._args) => pullReadingList())
+    .command("convert", "markdown convert json")
+    .action((_option, ..._args) => convert())
+    .command("edit", "Edit")
+    .action(() => edit())
+    .parse(Deno.args);
+}
