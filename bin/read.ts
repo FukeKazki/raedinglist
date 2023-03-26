@@ -4,6 +4,8 @@ import { Command } from "cliffy/command/mod.ts";
 import { Cell, Table } from "cliffy/table/mod.ts";
 import { Select } from "https://deno.land/x/cliffy@v0.25.7/prompt/select.ts";
 import { basename, extname, fromFileUrl, join, normalize } from "std";
+import { resolve } from "https://deno.land/std@0.130.0/path/mod.ts";
+import { format } from "https://deno.land/std@0.130.0/datetime/mod.ts";
 
 export const useCommand = async (cmd: string[]) => {
   const p = Deno.run({
@@ -188,6 +190,29 @@ const convert = async () => {
   }
 };
 
+export const create = async (title: string, url: string, memo = "") => {
+  console.log("よばれたよ");
+  const obj = {
+    date: new Date(),
+    title,
+    url,
+    memo,
+  };
+  const date = format(new Date(), "yyyyMMdd");
+
+  const path = resolve(`${Deno.env.get("HOME")}/readinglist/${date}.json`);
+  const row = await Deno.readTextFile(path).catch(() => "[]");
+  const json = JSON.parse(row);
+  json.push(obj);
+  await Deno.writeTextFile(
+    path,
+    JSON.stringify(json),
+    {
+      create: true,
+    },
+  );
+};
+
 if (import.meta.main) {
   await new Command()
     .name("reading")
@@ -200,5 +225,13 @@ if (import.meta.main) {
     .action((_option, ..._args) => convert())
     .command("edit", "Edit")
     .action(() => edit())
+    .command("create", "create readinglist")
+    .option("-t --title", "Title")
+    .option("-u --url", "Url")
+    .arguments("<value:string> <value:string>")
+    .action((_option, ...args) => {
+      const [title, url] = args;
+      create(title, url);
+    })
     .parse(Deno.args);
 }

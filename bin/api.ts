@@ -1,6 +1,6 @@
 import { Application, Router, RouterContext } from "oak";
 import { oakCors } from "cors";
-import { getFiles } from "./read.ts";
+import { create, getFiles } from "./read.ts";
 
 const app = new Application();
 const router = new Router();
@@ -32,6 +32,12 @@ router.get("/list", async (ctx: RouterContext) => {
   ctx.response.body = {
     list: response.flat(),
   };
+});
+
+router.post("/add", async (ctx) => {
+  const { title, url } = await ctx.request.body().value;
+  await create(title, url);
+  ctx.response.body = "";
 });
 
 app.use(oakCors());
