@@ -1,3 +1,5 @@
+#!/usr/bin/env -S deno run -A
+
 import { Application, Router, RouterContext } from "oak";
 import { oakCors } from "cors";
 import { create, getFiles } from "./read.ts";
